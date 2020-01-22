@@ -1,0 +1,10 @@
+version: '3.1'
+
+services:
+  web:
+    image: postit/service-cicd
+    restart: always
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    environment:
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
