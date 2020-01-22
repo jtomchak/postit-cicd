@@ -8,3 +8,5 @@ services:
       - ${APP_PORT}:${APP_PORT}
     environment:
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock 
