@@ -9,6 +9,7 @@ use Mix.Config
 
 # Configures the endpoint
 config :postit_cicd, PostitCicdWeb.Endpoint,
+  server: true,
   url: [host: "localhost"],
   secret_key_base: "t6gIgl+UGeexgLgLyA+nzxXo2M8PzLMKBppHVUjluEWA8BeRBE0DuIqVbJR7Eavx",
   render_errors: [view: PostitCicdWeb.ErrorView, accepts: ~w(json)],
