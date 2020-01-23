@@ -30,9 +30,9 @@ defmodule PostitCicd.Pipeline.BuildServer do
   #   {:reply, poll, poll}
   # end
 
-  def handle_cast({:create_build, username}, build) do
+  def handle_cast({:create_build, username}, state) do
     build = Build.create_build(username)
-    {:noreply, build}
+    {:noreply, state}
   end
 
   def handle_call({:get}, _from, build) do
