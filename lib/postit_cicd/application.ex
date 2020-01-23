@@ -4,12 +4,14 @@ defmodule PostitCicd.Application do
   @moduledoc false
 
   use Application
+  alias PostitCicd.Pipeline.BuildSupervisor
 
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
-      PostitCicdWeb.Endpoint
+      PostitCicdWeb.Endpoint,
+      {BuildSupervisor, []}
       # Starts a worker by calling: PostitCicd.Worker.start_link(arg)
       # {PostitCicd.Worker, arg},
     ]

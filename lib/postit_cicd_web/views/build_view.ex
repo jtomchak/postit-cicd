@@ -12,6 +12,6 @@ defmodule PostitCicdWeb.BuildView do
   end
 
   def render("build.json", %{build: build}) do
-    %{id: build.id, username: build.username}
+    %{username: build.username}
   end
 end
