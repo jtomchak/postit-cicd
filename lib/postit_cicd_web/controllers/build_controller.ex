@@ -2,7 +2,8 @@ defmodule PostitCicdWeb.BuildController do
   use PostitCicdWeb, :controller
 
   alias PostitCicd.Pipeline
-  alias PostitCicd.Pipeline.Build
+  alias PostitCicd.Pipeline.BuildSupervisor
+  alias PostitCicd.Pipeline.BuildServer
 
   action_fallback PostitCicdWeb.FallbackController
 
@@ -12,7 +13,8 @@ defmodule PostitCicdWeb.BuildController do
 
   def create(conn, %{"build" => %{"username" => username}}) do
     build = %{username: username}
-    Build.create_build(username)
+    BuildSupervisor.start_build(username)
+    BuildServer.create_build(username)
     render(conn, "show.json", build: build)
   end
 
