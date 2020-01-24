@@ -27,7 +27,7 @@ defmodule PostitCicd.Pipeline.Build do
         "GOOGLE_PROJECT_ID=post-it-services",
         "-e",
         "USERNAME=#{username}",
-        "jtomchak/postitci:1.0.0"
+        "jtomchak/postitci:latest"
       ],
       [
         {:line, 4096}
