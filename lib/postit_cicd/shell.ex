@@ -6,7 +6,7 @@ defmodule PostitCicd.Shell do
         opts ++ [{:args, args}, :binary, :exit_status, :hide, :use_stdio, :stderr_to_stdout]
       )
 
-    handle_output(port)
+    port
   end
 
   def handle_output(port) do
