@@ -19,6 +19,7 @@ WORKDIR /app
 
 # Copy over all the necessary application files and directories
 COPY config ./config
+COPY bin ./bin
 COPY lib ./lib
 COPY priv ./priv
 COPY mix.exs .
