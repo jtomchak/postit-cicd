@@ -11,11 +11,11 @@ defmodule PostitCicdWeb.BuildController do
     render(conn, "index.json", builds: [])
   end
 
-  def create(conn, %{"build" => %{"username" => username}}) do
-    build = %{username: username}
+  def create(conn, %{"build" => %{"username" => username, "title" => title}}) do
+    buildpayload = %{username: username, title: title}
     BuildSupervisor.start_build(username)
     BuildServer.create_build(username)
-    render(conn, "show.json", build: build)
+    render(conn, "show.json", build: buildpayload)
   end
 
   # def show(conn, %{"id" => id}) do

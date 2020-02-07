@@ -14,22 +14,15 @@ defmodule PostitCicd.Pipeline.Build do
   # docker run -it --rm -e GOOGLE_ACCOUNT_KEY="$(< ~/.gcloud/keyfile.json)" -e GOOGLE_PROJECT_ID=post-it-services -e USERNAME=jesse postit/ci:latest
   # 
   def create_build(build) do
-    dockercmd = System.find_executable("docker")
     authfile = File.read!("../keyfile.json")
 
+    dockerbuildcmd =
+      System.cwd()
+      |> Path.join("bin/dockerbuild.sh")
+
     Shell.exec(
-      dockercmd,
-      [
-        "run",
-        "--rm",
-        "-e",
-        "GOOGLE_ACCOUNT_KEY=#{authfile}",
-        "-e",
-        "GOOGLE_PROJECT_ID=post-it-services",
-        "-e",
-        "USERNAME=#{build.username}",
-        "jtomchak/postitci:latest"
-      ],
+      dockerbuildcmd,
+      [authfile, build.username],
       [
         {:line, 4096}
       ]
