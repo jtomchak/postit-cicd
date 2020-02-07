@@ -19,7 +19,6 @@ WORKDIR /app
 
 # Copy over all the necessary application files and directories
 COPY config ./config
-COPY scripts ./scripts
 COPY lib ./lib
 COPY priv ./priv
 COPY mix.exs .

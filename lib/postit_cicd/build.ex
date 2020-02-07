@@ -2,6 +2,10 @@ defmodule PostitCicd.Pipeline.Build do
   alias __MODULE__
   alias PostitCicd.Shell
 
+  @external_resource "priv/dockerbuild.sh"
+  @dockerbuild_contents File.read!("priv/dockerbuild.sh")
+  def dockerbuild_contents, do: @dockerbuild_contents
+
   defstruct(username: "", status: "", log: [])
 
   def new(username) do
@@ -15,14 +19,21 @@ defmodule PostitCicd.Pipeline.Build do
   # 
   def create_build(build) do
     authfile = File.read!("../keyfile.json")
-
-    dockerbuildcmd =
-      System.cwd()
-      |> Path.join("scripts/dockerbuild.sh")
+    dockercmd = System.find_executable("docker")
 
     Shell.exec(
-      dockerbuildcmd,
-      [authfile, build.username],
+      dockercmd,
+      [
+        "run",
+        "--rm",
+        "-e",
+        "GOOGLE_ACCOUNT_KEY=#{authfile}",
+        "-e",
+        "GOOGLE_PROJECT_ID=post-it-services",
+        "-e",
+        "USERNAME=#{build.username}",
+        "jtomchak/postitci:latest"
+      ],
       [
         {:line, 4096}
       ]
