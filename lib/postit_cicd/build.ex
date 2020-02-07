@@ -18,7 +18,7 @@ defmodule PostitCicd.Pipeline.Build do
 
     dockerbuildcmd =
       System.cwd()
-      |> Path.join("bin/dockerbuild.sh")
+      |> Path.join("scripts/dockerbuild.sh")
 
     Shell.exec(
       dockerbuildcmd,
